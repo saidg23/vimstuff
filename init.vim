@@ -32,9 +32,11 @@ Plug 'alvan/vim-closetag'
 
 Plug 'tpope/vim-surround'
 
-Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
 
 call plug#end()
+
+let g:closetag_close_shortcut = '.>'
 
 "----------------------------------------------------------------------------------------------
 
@@ -50,8 +52,9 @@ nnoremap <C-k> <C-W>k
 nnoremap <C-l> <C-W>l
 nnoremap <leader>f zfa}
 nnoremap <leader>n :set relativenumber!<return>
-nnoremap <leader>ev :vsplit $MYVIMRC<return>
 nnoremap <leader>sv :source $MYVIMRC<return>
+nnoremap <leader>c "x
+vnoremap <space> <Nop>
 
 "----------------------------------------------------------------------------------------------
 
@@ -73,14 +76,20 @@ augroup END
 augroup filetype_html
     autocmd!
     autocmd filetype html :iabbrev <buffer> --- &mdash
+    autocmd filetype html :setlocal  tabstop=2
+    autocmd filetype html :setlocal shiftwidth=2
+augroup END
+
+augroup filetype_css
+    autocmd!
+    autocmd filetype css :setlocal tabstop=2
+    autocmd filetype css :setlocal shiftwidth=2
 augroup END
 
 augroup web_group
     autocmd!
     autocmd BufReadPre,BufNewFile *.html,*.css,*.js :nnoremap <leader>w :call Webprev()<cr>
     autocmd BufReadPre,BufNewFile *.html,*.css,*.js :nnoremap <leader>k :call Killprev()<cr>
-    autocmd BufWritePost *.html,*.css,*.js :call RefreshWebpage()
-    autocmd ExitPre *.html,*.css,*.js :call Killprev()
 augroup END
 
 "----------------------------------------------------------------------------------------------
@@ -95,6 +104,9 @@ function Webprev()
 
     let l:command = "surf file://localhost" . l:location . " & printf $!"
     let g:surfpid = system(l:command)
+
+    autocmd BufWritePost *.html,*.css,*.js :call RefreshWebpage()
+    autocmd ExitPre *.html,*.css,*.js :call Killprev()
 endfunction
 
 function Killprev()
