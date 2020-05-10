@@ -4,9 +4,11 @@ if exists("syntax_on")
     syntax reset
 endif
 
-let g:colors_name = "customblue"
+let g:colors_name = "custom"
 
-hi Normal        guifg=white guibg=#001a30
+"guibg=#001a30
+
+hi Normal        guifg=white
 hi Comment       guifg=steelBlue
 hi Constant      guifg=firebrick1
 hi Character     guifg=cyan1

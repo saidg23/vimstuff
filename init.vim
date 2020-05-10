@@ -12,6 +12,7 @@ set laststatus=2
 set nohlsearch
 set splitbelow
 set splitright
+set hidden
 
 "----------------------------------------------------------------------------------------------
 
@@ -34,9 +35,19 @@ Plug 'tpope/vim-surround'
 
 Plug 'tpope/vim-commentary'
 
+Plug 'RRethy/vim-hexokinase', { 'do': 'make hexokinase' }
+
 call plug#end()
 
 let g:closetag_close_shortcut = '.>'
+
+let g:Hexokinase_optInPatterns = 'full_hex,triple_hex,rgb,rgba,hsl,hsla,colour_names'
+
+let g:Hexokinase_highlighters = [ 'backgroundfull' ]
+
+let g:Hexokinase_refreshEvents = ["InsertLeave", "TextChanged", "BufWrite", "BufRead"]
+
+autocmd VimEnter * HexokinaseTurnOn
 
 "----------------------------------------------------------------------------------------------
 
@@ -59,6 +70,11 @@ vnoremap <space> <Nop>
 "----------------------------------------------------------------------------------------------
 
 iabbrev @@ said.garcia12@gmail.com
+iabbrev shb #!/bin/sh
+iabbrev htdoc <!DOCTYPE html>
+iabbrev && &amp;
+iabbrev &< &lt;
+iabbrev &> &gt;
 
 "----------------------------------------------------------------------------------------------
 
