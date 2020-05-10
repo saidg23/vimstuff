@@ -12,6 +12,7 @@ set laststatus=2
 set nohlsearch
 set splitbelow
 set splitright
+
 set hidden
 
 "----------------------------------------------------------------------------------------------
